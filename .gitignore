@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+static_root/
+
+# Virtual Environment
+venv/
+.env
+.env.*
+
+# Node / React (inside travelUI/)
+travelUI/node_modules/
+travelUI/.env
+travelUI/build/
+travelUI/.next/
+travelUI/.parcel-cache/
+travelUI/npm-debug.log*
+travelUI/yarn-debug.log*
+travelUI/yarn-error.log*
+travelUI/.eslintcache
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
