@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
 
-function Register() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -33,8 +31,8 @@ function Register() {
         password,
         password2,
       });
-
-      localStorage.setItem("pending_email", email);
+      localStorage.setItem("pending_email", email); //tores a value (email) in the browser’s localStorage under
+      // the key "pending_email".
       navigate("/verify-pending");
     } catch (err) {
       if (err.response?.data) {
@@ -46,10 +44,8 @@ function Register() {
         } else {
           setError("Registration failed. Please check your inputs.");
         }
-      } else {
-        setError("Registration failed. Please try again.");
+        console.error("Registration error:", err);
       }
-      console.error("Registration error:", err);
     } finally {
       setLoading(false);
     }
@@ -60,7 +56,6 @@ function Register() {
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
-
           {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
           {loading && (
@@ -88,7 +83,6 @@ function Register() {
               <p className="text-blue-600">Creating your account...</p>
             </div>
           )}
-
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="block text-gray-700 mb-1" htmlFor="email">
@@ -105,7 +99,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <div className="mb-4">
               <label className="block text-gray-700 mb-1" htmlFor="firstName">
                 First Name
@@ -120,7 +113,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <div className="mb-4">
               <label className="block text-gray-700 mb-1" htmlFor="lastName">
                 Last Name
@@ -135,7 +127,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <div className="mb-4">
               <label className="block text-gray-700 mb-1" htmlFor="dateOfBirth">
                 Date of Birth
@@ -149,7 +140,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <div className="mb-4">
               <label
                 className="block text-gray-700 mb-1"
@@ -167,7 +157,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <div className="mb-4">
               <label className="block text-gray-700 mb-1" htmlFor="gender">
                 Gender
@@ -185,7 +174,6 @@ function Register() {
                 <option value="C">Custom</option>
               </select>
             </div>
-
             <div className="mb-4">
               <label className="block text-gray-700 mb-1" htmlFor="password">
                 Password
@@ -201,7 +189,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <div className="mb-6">
               <label className="block text-gray-700 mb-1" htmlFor="password2">
                 Confirm Password
@@ -217,7 +204,6 @@ function Register() {
                 disabled={loading}
               />
             </div>
-
             <button
               type="submit"
               disabled={loading}
@@ -256,20 +242,8 @@ function Register() {
               )}
             </button>
           </form>
-
-          <div className="mt-4 text-center">
-            <Link
-              to="/login"
-              className="text-blue-600 hover:underline hover:text-blue-800 transition duration-200"
-            >
-              Already have an account? Login
-            </Link>
-          </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
-
-export default Register;

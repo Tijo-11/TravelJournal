@@ -42,8 +42,30 @@ export const store = configureStore({
 export const persistor = persistStore(store); //This allows app to persist and rehydrate state using <PersistGate>.
 
 /*
-1.In classic Redux, you'd write something like:dispatch({ type: "SET_USER", payload: user });
-2. In Redux Toolkit (createSlice), you don't need to define action types manually.
-3.Redux Toolkit automatically generates the action types for you when you use createSlice
-4.Redux Toolkit auto-generates action types in the format: "{sliceName}/{reducerName}".
-5.You still can access them if needed via setUser.type. */
+Yes, you can persist login without using `persistor` by manually storing authentication data (like tokens) 
+using libraries such as `js-cookie`. However, `redux-persist` and `js-cookie` serve different purposes and are 
+often used together in a secure and user-friendly authentication setup. `redux-persist` helps keep the Redux
+ state (like user profile or login status) in `localStorage` or `sessionStorage` so the state survives page 
+ reloads, making the app feel seamless. On the other hand, `js-cookie` is used to store sensitive authentication
+tokens (like `accessToken` and `refreshToken`) securely in browser cookies. This is important because storing
+tokens directly in Redux or localStorage is not safe, as these are easily accessible through browser developer
+tools. Cookies can be configured with security flags like `SameSite`, `HttpOnly`, and expiration settings
+ to better protect user data. So while you could choose one or the other, using both allows you to persist user 
+ state with Redux and `redux-persist` while securely handling tokens using `js-cookie`, giving you both 
+ convenience and security in authentication workflows.
+
+*/
+
+/* Store.js Without PERSISTOR___________##$$#$#$%#$#
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./authSlice";
+
+// Create a basic Redux store with only the auth slice
+export const store = configureStore({
+  reducer: {
+    auth: authReducer, // authReducer directly manages the auth state
+  },
+  devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools in development
+});
+_______________________________
+*/
